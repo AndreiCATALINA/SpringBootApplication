@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,5 +22,15 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<List<Customer>> getAllCustomers(){
         return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/customersById")
+    public ResponseEntity<Optional<Customer>> getAllCustomersById(Long id){
+        return new ResponseEntity<>(customerService.getCustomerById(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/customersByName")
+    public ResponseEntity<List<Customer>> getAllCustomersByName(String name){
+        return new ResponseEntity<>(customerService.getCustomersByName(name),HttpStatus.OK);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController //@RestController VS @Controller -> Spring rest api
@@ -32,5 +33,20 @@ public class BookController {
     public ResponseEntity<List<Book>> getAllBooks(){
         return new ResponseEntity<>(bookService.readAllBooks(), HttpStatus.OK);
     };
+
+    @GetMapping("/booksById")
+    public ResponseEntity<Optional<Book>> getAllBooksById(Long id){
+        return new ResponseEntity<>(bookService.getBookById(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/booksByName")
+    public ResponseEntity<List<Book>> getAllBooksByName(String name){
+        return new ResponseEntity<>(bookService.getAllBooksByName(name),HttpStatus.OK);
+    }
+
+    @GetMapping("/booksByIsbn")
+    public ResponseEntity<List<Book>> getAllBooksByIsbn(String isbn){
+        return new ResponseEntity<>(bookService.getAllBooksByIsbn(isbn),HttpStatus.OK);
+    }
 
 }
