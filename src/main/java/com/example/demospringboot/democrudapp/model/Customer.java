@@ -17,6 +17,6 @@ public class Customer {
     private String email;
     private String phone;
     //One-to-many relationship with order entity
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private List<Order> orders;
 }
