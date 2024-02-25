@@ -1,6 +1,9 @@
 package com.example.demospringboot.democrudapp.service.impl;
 
+import com.example.demospringboot.democrudapp.exception.EntityNotFoundException;
+import com.example.demospringboot.democrudapp.model.Customer;
 import com.example.demospringboot.democrudapp.model.Order;
+import com.example.demospringboot.democrudapp.repository.CustomerRepository;
 import com.example.demospringboot.democrudapp.repository.OrderRepository;
 import com.example.demospringboot.democrudapp.service.OrderService;
 import org.springframework.stereotype.Service;
@@ -13,9 +16,11 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
+    private CustomerRepository customerRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, CustomerRepository customerRepository) {
         this.orderRepository = orderRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override

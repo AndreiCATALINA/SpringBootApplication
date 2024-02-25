@@ -1,5 +1,6 @@
 package com.example.demospringboot.democrudapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ public class Customer {
     private String email;
     private String phone;
     //One-to-many relationship with order entity
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnoreProperties("customer")
     private List<Order> orders;
 }

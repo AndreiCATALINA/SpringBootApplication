@@ -1,5 +1,6 @@
 package com.example.demospringboot.democrudapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,8 +30,12 @@ public class Book {
     private String category;
 
     //Many-to-many relationship with order entity
-    @ManyToMany(mappedBy = "bookList",fetch = FetchType.LAZY) //(default) lazy load -> incarcarea relatiei nu se va face imediat ci doar atunci cand e nevoie de ea,entitatile asociate sunt incarcate doar atunci cand sunt accesate prima data
-    private List<Order> orderList;                             // eager load -> toate entitatile asociate sunt incarcate din baza de date simultan
+    @ManyToMany
+    @JoinTable(name = "orders_books",
+            joinColumns = @JoinColumn(name = "book_id",referencedColumnName = "id"), //refera join cu cheia primara din tabela curenta(books)
+            inverseJoinColumns = @JoinColumn(name = "order_id",referencedColumnName = "id")) // refera join cu FK-ul celeilalte tabele(orders)
+    @JsonIgnoreProperties("bookList")
+    private List<Order> orderList;
 
 
 }
