@@ -31,8 +31,11 @@ public class Order {
     private Customer customer;
 
     //Many-to-many relationship with book entity
-    @ManyToMany(mappedBy = "orderList", fetch = FetchType.LAZY) //(default) lazy load -> incarcarea relatiei nu se va face imediat ci doar atunci cand e nevoie de ea,entitatile asociate sunt incarcate doar atunci cand sunt accesate prima data
+    @ManyToMany
+    @JoinTable(name = "books_orders",
+            joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     @JsonIgnoreProperties("orderList")
-    private List<Book> bookList;                              // eager load -> toate entitatile asociate sunt incarcate din baza de date simultan
+    private List<Book> bookList;
 
 }

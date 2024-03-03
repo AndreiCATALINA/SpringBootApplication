@@ -30,10 +30,7 @@ public class Book {
     private String category;
 
     //Many-to-many relationship with order entity
-    @ManyToMany
-    @JoinTable(name = "orders_books",
-            joinColumns = @JoinColumn(name = "book_id",referencedColumnName = "id"), //refera join cu cheia primara din tabela curenta(books)
-            inverseJoinColumns = @JoinColumn(name = "order_id",referencedColumnName = "id")) // refera join cu FK-ul celeilalte tabele(orders)
+    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY)
     @JsonIgnoreProperties("bookList")
     private List<Order> orderList;
 
